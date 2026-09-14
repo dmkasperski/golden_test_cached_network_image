@@ -1,0 +1,39 @@
+name: golden_test_cached_network_image
+description: "Makes CachedNetworkImage work in golden_test golden tests: serves a placeholder from an in-memory cache, with no SQLite or platform channels."
+version: 1.0.0
+homepage: https://github.com/dmkasperski/golden_test_cached_network_image
+repository: https://github.com/dmkasperski/golden_test_cached_network_image
+
+topics:
+  - flutter
+  - testing
+  - golden-tests
+  - ui-testing
+  - snapshot-testing
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cached_network_image: ^3.4.0
+  file: ^7.0.0
+  flutter_cache_manager: ^3.0.0
+  golden_test: ^1.2.0
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+# Local development only: resolves golden_test from the sibling checkout until
+# 1.2.0 is on pub.dev. REMOVE THIS BLOCK BEFORE PUBLISHING — publish golden_test
+# 1.2.0 first, then this package resolves `golden_test: ^1.2.0` normally.
+dependency_overrides:
+  golden_test:
+    path: ../golden_test
+
+flutter:
+  uses-material-design: true
