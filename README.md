@@ -18,7 +18,7 @@ It ships separately from `golden_test` because the fix requires depending on `ca
 
 ```yaml
 dev_dependencies:
-  golden_test: ^1.2.0
+  golden_test: ^2.0.0
   golden_test_cached_network_image: ^1.0.0
 ```
 
