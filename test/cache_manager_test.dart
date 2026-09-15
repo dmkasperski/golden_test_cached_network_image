@@ -20,11 +20,6 @@ void main() {
     goldenTestNetworkImageStubPng = defaultStubPng;
   });
 
-  tearDown(() {
-    goldenTestImageLoaderSetups.clear();
-    goldenTestNetworkImageStubPng = defaultStubPng;
-  });
-
   group('GoldenTestCacheManager', () {
     test('getFileStream serves the stub bytes', () async {
       final response = await manager.getFileStream(_url).first;
@@ -36,8 +31,9 @@ void main() {
     });
 
     test('getFileStream emits one FileInfo and no DownloadProgress', () async {
-      final responses =
-          await manager.getFileStream(_url, withProgress: true).toList();
+      final responses = await manager
+          .getFileStream(_url, withProgress: true)
+          .toList();
 
       expect(responses, hasLength(1));
       expect(responses.single, isA<FileInfo>());
@@ -57,30 +53,34 @@ void main() {
       expect(await manager.getFileFromMemory(_url), isNotNull);
     });
 
-    test('stores under the cache key, not the url, when a key is given',
-        () async {
-      await manager.getFileStream(_url, key: 'avatar-1').first;
+    test(
+      'stores under the cache key, not the url, when a key is given',
+      () async {
+        await manager.getFileStream(_url, key: 'avatar-1').first;
 
-      final byKey = await manager.getFileFromCache('avatar-1');
-      expect(byKey, isNotNull);
-      expect(
-        byKey!.originalUrl,
-        _url,
-        reason: 'FileInfo should still report the url it was fetched for',
-      );
+        final byKey = await manager.getFileFromCache('avatar-1');
+        expect(byKey, isNotNull);
+        expect(
+          byKey!.originalUrl,
+          _url,
+          reason: 'FileInfo should still report the url it was fetched for',
+        );
 
-      expect(
-        await manager.getFileFromCache(_url),
-        isNull,
-        reason: 'the url is not the cache key once an explicit key is used',
-      );
-    });
+        expect(
+          await manager.getFileFromCache(_url),
+          isNull,
+          reason: 'the url is not the cache key once an explicit key is used',
+        );
+      },
+    );
 
-    test('getFileFromCache and getFileFromMemory return null for unknown keys',
-        () async {
-      expect(await manager.getFileFromCache('never-fetched'), isNull);
-      expect(await manager.getFileFromMemory('never-fetched'), isNull);
-    });
+    test(
+      'getFileFromCache and getFileFromMemory return null for unknown keys',
+      () async {
+        expect(await manager.getFileFromCache('never-fetched'), isNull);
+        expect(await manager.getFileFromMemory('never-fetched'), isNull);
+      },
+    );
 
     test('downloadFile honours the cache key', () async {
       final info = await manager.downloadFile(_url, key: 'avatar-1');

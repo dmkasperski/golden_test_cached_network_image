@@ -73,15 +73,13 @@ class GoldenTestCacheManager implements BaseCacheManager {
     String? key,
     Map<String, String>? authHeaders,
     bool force = false,
-  }) async =>
-      _store(key ?? url, url);
+  }) async => _store(key ?? url, url);
 
   @override
   Future<FileInfo?> getFileFromCache(
     String key, {
     bool ignoreMemCache = false,
-  }) async =>
-      _lookup(key);
+  }) async => _lookup(key);
 
   @override
   Future<FileInfo?> getFileFromMemory(String key) async => _lookup(key);
