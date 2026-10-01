@@ -1,6 +1,6 @@
 # golden_test_cached_network_image
 
-`CachedNetworkImage` support for [`golden_test`](https://pub.dev/packages/golden_test).
+`CachedNetworkImage` support for [`golden_test`](https://pub.dev/packages/golden_test). Live examples and docs: [goldentest.dev](https://goldentest.dev).
 
 ## The problem
 
